@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Ambulance</title>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function redirectToForm() {
+            const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdTPO3KUZl3Hsjal21PcjyMP5MiNnaoPtu4t-4cOyRagrbJ5A/viewform?usp=pp_url";
+            const vehicleField = "entry.1902348226";
+            const dateField = "entry.1069931504";
+
+
+            var vehicle = getQueryParam("vehicle") || ""; // Changez cette valeur selon le véhicule
+            const now = new Date();
+            const date = now.toISOString().slice(0, 10); // Format YYYY-MM-DD
+            const time = now.toTimeString().slice(0, 5); // Format HH:MM
+            console.log(vehicle, date, time)
+
+            const url = `${baseUrl}&${vehicleField}=${encodeURIComponent(vehicle)}&${dateField}=${encodeURIComponent(date)}+${encodeURIComponent(time)}`;
+            window.location.href = url;
+        }
+    </script>
+</head>
+
+<body onload="redirectToForm()">
+    <p>Redirection vers le formulaire en cours...</p>
+</body>
+
+</html>
